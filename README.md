@@ -1,51 +1,19 @@
-
 # Welcome to Modality Software Docs
 
-docs.modalitysoftware.com is the home for Modality Software documentation.
+To find out more about Modality Software, visit [modalitysystems.com](https://www.modalitysystems.com/)
 
-To find out more about Modality Software, visit [modalitysoftware.com](https://www.modalitysoftware.com).
+If you cant find what you’re looking for, please [get in touch](mailto:enquiries@modalitysystems.com)
 
----
+------
 
-# CreateTeam
+## [Teamwork Analytics](/twa/README.md)
 
->[CreateTeam Deployment](CreateTeam)
+## [OneConsultation](https://docs.oneconsultation.net/)
 
----
-# Teams Chat Assist
+## [OneMeeting](/OneMeeting/OneMeetingCVISetup.md)
 
->[Teams Chat Assist Deployment](TeamsChatAssist)
+## [CustomInvite](/CustomInvite/README.md)
 
->[Teams Chat Assist User Guide](TeamsChatAssist/userguide.md)
+## [Teams Chat Assist](/TeamsChatAssist/readme.md)
 
----
-
-# Teamwork Analytics
-
->[Teamwork Analytics Architecture](twa/README.md)
-
->[Teamwork Analytics Data Collection Explained](twa/TeamworkAnalyticsDataCollectionExplained.md)
-
->[Teamwork Analytics Frequently Asked Questions](twa/TWA-FAQ.md)
-
-## Teamwork Analytics Backend
-
->[Teamwork Analytics Data Collector Deployment](twa/README.md)
-
->[Teamwork Analytics Automation Deployment](twa/twabot)
-
-## Teamwork Analytics PowerBI Apps
-
-These PowerBI apps are available from [Microsoft AppSource](https://modalitysoftware.com/twa)
-
->[Teamwork Analytics Power BI Apps installation guide](twa/PowerBIAppsAdminInstallGuide.md)
-
->[Teamwork Analytics: Teams Usage](twa/ModalityTeamsUsage.md)
-
->[Teamwork Analytics: Teams Governance & Security](twa/ModalityTeamsGovernanceAndSecurity.md)
-
->[Teamwork Analytics: Teams PSTN Billing](twa/ModalityPSTNBilling.md)
-
->[Teamwork Analytics: Online Meeting Usage](twa/ModalityOnlineMeetingUsage.md)
-
->[Teamwork Analytics: Yammer Usage](twa/ModalityYammerUsage.md)
+------

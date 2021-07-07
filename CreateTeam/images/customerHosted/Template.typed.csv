@@ -1,0 +1,27 @@
+PartitionKey,RowKey,Name,Description,TemplateJson,Description@type,Name@type,TemplateJson@type
+xxx-your-tenant-id-xxx,33ad45dd-9841-4856-ac5b-7e31e716ffed,First Template,First Description,"{
+   ""Prefix"": ""Prefix"",
+   ""Suffix"": ""UK Sales"",
+   ""IsExternal"":true,
+   ""Visibility"":1,
+   ""Channels"":[
+      {
+         ""DisplayName"": ""General"",
+         ""Tabs"":[
+            {
+               ""Type"": ""website"",
+               ""DisplayName"": ""My Website Tab"",
+               ""Contenturl"": ""https://www.google.co.uk/""
+            }
+         ]
+      },
+      {
+         ""DisplayName"":""Channel name"",
+         ""Description"":""Channel description""
+      }
+   ],
+   ""AlwaysAuthorise"":false,
+   ""ApprovalEmailList"":"""",
+   ""AzureSecurityGroup"":"""",
+   
+}",Edm.String,Edm.String,Edm.String

@@ -1,6 +1,6 @@
 # Customise
 
-To customise this image first download the [2016](https://github.com/modalitysystems/modalitysoftware-docs/releases/download/ltsc2016/vsts-agent-ltsc2016.zip) or [2019](https://github.com/modalitysystems/modalitysoftware-docs/releases/download/ltsc2019/vsts-agent-ltsc2019.zip) version of the docker file package, depending on your host os, and extract the downloaded zip file
+To customise this image first download the [2016](https://github.com/modalitysystems/modalitysoftware-docs/releases/download/ltsc2016/vsts-agent-ltsc2016.zip) or [2019](https://github.com/modalitysystems/modalitysoftware-docs/releases/download/ltsc2019/vsts-agent-ltsc2019.zip) version of the docker file package, depending on your host os, and extract the downloaded zip file. Docker Enterprise in Server 2019 seems to have improved considerably from 2016
 
 ![Dockerfile](images/dockerfile-install.png)
 
@@ -10,15 +10,15 @@ Make appropriate adjustments but leave start.ps1 script unchanged
 
 Open PowerShell from the extraction location and run the following command:
 
-docker build -t vsts-agent:ltsc2016-1.0 .
+docker build -t vsts-agent:1.0 .
 
 To create a container from this image and access a powershell prompt run the following command:
 
-docker run --rm -it vsts-agent:ltsc2016-1.0 powershell.exe
+docker run --rm -it vsts-agent:1.0 powershell.exe
 
 To create an Azure DevOps Agent from this image run the following command:
 
-docker run -e AZP_URL=? -e AZP_TOKEN=? -e AZP_POOL=? -d vsts-agent:ltsc2016-1.0
+docker run -e AZP_URL=? -e AZP_TOKEN=? -e AZP_POOL=? -d vsts-agent:1.0
 
 # Push to Docker Hub
 

@@ -1,13 +1,11 @@
-## Registering Teamwork Analytics as an Azure Application
+## Registering Teamwork Analytics as an Azure Application *
 This document describes the process of registering Teamwork Analytics Client as an Azure Application as the first step to deployment.  As part of the registration you will gather the following information for use further along the deployment process.
    * Application ID
    * Application Secret
    * Tenant ID
-   
-> Note: Instead of registering the application via the azure portal, you can execute the [application creation powershell](https://github.com/modalitysystems/modalitysoftware-docs/releases/download/GraphETL/AzureAppRegistrationCreate.ps1) script instead.   
 
 ### Register Teamwork Analytics with Azure Active Directory
-1. Sign in to the [Azure Portal](https://azure.portal.com)
+1. Sign in to the [Azure Portal](https://azure.microsoft.com/en-gb/features/azure-portal/)
 1. Select the **Azure Active Directory** service from the navigation pane on the left 
 1. Select **App Registrations** and click **New Registration** (Take care not to select **App Registrations (Legacy)** as these instructions do not apply to them)
 1. Enter the following application registration details
@@ -17,7 +15,7 @@ This document describes the process of registering Teamwork Analytics Client as 
    * (The **Redirect URI Type** dropdown can be left as the default value of **Web**)
 1. Click **Register** and Azure AD will create an Application ID and present the Overview page
 ![application registration](images/applicationRegistration.png)
-1. Take note of the **ApplicationID** as this will be required futher in the deployment process
+1. Take note of the **ApplicationID** as this will be required further in the deployment process
 ![overview of application](images/applicationOverview.png)
 
 ### Add a Client Secret
@@ -45,7 +43,6 @@ This document describes the process of registering Teamwork Analytics Client as 
    * Files.Read.All
    * Group.Read.All
    * Reports.Read.All
-   * Sites.Read.All
    * User.Read.All
 1. Click **Add permissions** to be returned to the "API permissions" blade
 1. Click the **Grant Admin Consent for Your Name** button

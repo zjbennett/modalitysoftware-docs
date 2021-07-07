@@ -1,7 +1,15 @@
 # Welcome
 
-The Teams Governance Technical Documentation site provides access to all of the platform documentation you will need to successfully setup and configure Teams Governance.
+The CreateTeam Documentation site provides access to all of the platform documentation you will need to successfully setup and configure CreateTeam.
 
->[How to deploy CreateTeam to your Microsoft Teams](deployteamsapp.md)
+![Architecture Diagram](images/architectureDiagram2.png)
 
->[Removing/disabiling the native Microsoft Teams Create a Team Button](RemovingDefaultTeamsCreateButton.md)
+>[How to deploy CreateTeam to your Microsoft Teams for Customer Hosted](customerHosted)
+
+>[Removing/disabling the native Microsoft Teams Create a Team Button](RemovingDefaultTeamsCreateButton.md)
+
+>[Managing User Roles](ManagingUserRoles.md)
+
+>[Configuring CreateTeam settings and templates](createteam-config.md)
+
+>[Reporting](Reporting.md)

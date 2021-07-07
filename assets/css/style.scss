@@ -103,8 +103,8 @@ a {
 .page-header {
   color: $header-heading-color;
   text-align: center;
-  background-color: $header-bg-color;
-  background-image: url("https://github.com/modalitysystems/modalitysoftware-docs/blob/master/assets/modalitysoftware-bg.jpg?raw=true");
+  background-color: #ffffff;
+  background-image: url("https://github.com/modalitysystems/modalitysoftware-docs/blob/master/assets/modalitysoftware-bg-2020.jpg?raw=true");
   background-position: center; 
   background-repeat: no-repeat;
 
@@ -142,17 +142,18 @@ a {
   margin-bottom: 2rem;
   font-weight: normal;
   opacity: 0.7;
+  text-align: center;
 
   @include large {
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
 
   @include medium {
-    font-size: 2.15rem;
+    font-size: 1.50rem;
   }
 
   @include small {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -193,7 +194,7 @@ a {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    color: $section-headings-color;
+    color: #464749;
   }
 
   p {

@@ -1,51 +1,60 @@
 # How to deploy Teamwork Analytics
 
-Teamwork Analytics is provided as an Azure Resource Manager (ARM) template that automatically provisions and starts the required resources in your Azure subscription.
+Teamwork Analytics is provided as an **Azure Resource Manager (ARM) template** that automatically provisions and starts the required resources in your Azure subscription but can also be installed on a **Customer Provided Windows VM** that writes to a customer provided SQL Server 2016 or higher database. Both modes of deployment are achieved by using the same deployment script.
+
+> Note: You will need a trial or full licence key, contact Software.Support@modalitysystems.com for a key if you do not have one.
 
 > Note: You must have [registered an application](registerapplication.md) beforehand.
 
 > Note: For an introduction to Azure Resource Manager see [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview).
 
-This ARM Template will install resources in your Azure tenant. The template will deploy the following resources:
+Download [InstallTWA.ps1](https://github.com/modalitysystems/TeamworkAnalyticsGABuilds/releases), the PowerShell script is version stamped and will install the version of Teamwork Analytics that matches the download.
+
+Each script is signed and will require an **Administrative PowerShell** window and the following PowerShell module to be installed before attempting to run the scripts:
+
+- [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps-msi)
+  
+They will also need to be able to access the internet so if you are running the scripts from behind a web proxy then this will need to be configured. First off run the PowerShell script by typing the name of the script from the script directory.
+
+  ![Script Choice](images/scriptchoice.png)
+
+Enter **O** to download and install Teamwork Analytics on the Windows machine that the script is being run from, or **A** to install all required components into Azure using an ARM Template.
+
+The script can also be used to move Teamwork Analytics from the machine that the script is being run from into Azure.
+
+Once you have made your selection enter the information as prompted, all selections are saved to a parametersFile.json file that will be read the next time the script is run so as to make upgrades easier.
+
+For ARM Template deployments the following will be installed in your Azure tenant:
 
 | Service Type  | Description   |
 | ------------- | ------------- |
-| Virtual Machines  | 1 B2MS (2 vCPU(s), 8 GB RAM) x 730 Hours; Windows – (OS only); Pay as you go; 1 managed OS disks – P10 |
+| Virtual Machines  | 1 B2MS (2 vCPU(s), 8 GB RAM) x 730 Hours; Windows – (OS only); Pay as you go; 1 managed OS disks – P10<sup>†</sup> |
 | Azure SQL Database  | Single Database, DTU purchase model, Standard tier, S2: 50 DTUs, 250 GB included storage per DB, 1 Database(s) x 730 Hours, 5 GB retention  |
 | Virtual Network  | 100 GB data transfer from region to region  |
 | IP Addresses  | 1 Dynamic IP Addresses, 0 Static IP Addresses  |
 | Storage Accounts  | Block Blob Storage, General Purpose V1, LRS Redundancy, 1,000 GB Capacity, 100 Storage transactions |
 
-## Installation
+> † By default TWA is configured to save up to 10GB of diagnostic logs to text files in its installation directory. Please ensure that the virtual machine has enough disk space for this eventuality. For more information see [Collecting Logs](CollectingLogs.md).
 
-1. Click on the ARM template link provided to you by post-sales (it may be a button that says "Deploy to Azure"). You will be taken to Microsoft Azure Portal and a deployment form will open as shown below.
-   ![Custom deployment form](images/deployForm.png)
-2. Carefully fill in the fields. In some cases the tooltips may provide extra guidance. 
-   - Basics
-     - **Subscription** - Choose the Azure subscription to which deployed resources will be billed.
-     - **Resource group** - It is strongly recommended that you create a new resource group for logical grouping and management of Teamwork Analytics. *When applying an upgrade choose the Resource Group that already contains Teamwork Analytics.*
-     - **Location** - The location of the newly created resource group (this only determines the geographical location of resource group and its metadata, to change the location of the resources themselves, see *Location* below).
-   - Settings
-     - **Vm Admin Credentials** - your choice of username and password that an administrator can use to sign in to the VM running Teamwork Analytics.
-       > Note: RDP is disabled by default for enhanced security.
-     - **Sql Server Credentials** - your choice of username and password that an administrator can use to sign in to the SQL database hosting Teamwork Analytics data. 
-     - **Azure Application details** - Use the details you generated when [registering an application](registerapplication.md).
-     - **Azure Tenant ID** - A globally unique identifier (GUID) that identifies the organization for which Teamwork Analytics will gather Teams usage data. By default this field uses `[subscription().tenantId]`, which gets automatically replaced with Tenant ID of the chosen subscription.
-       > Note: If you used a different Tenant ID when [registering an application](registerapplication.md), you must delete the contents of this field and enter the correct Tenant ID.
-     - **Location** - The geographical location of the Azure resources that will host Teamwork Analytics. By default this field uses `[resourceGroup().location]`, which gets automatically replaced with location of the chosen Resource Group. Optionally you can delete this and enter the name of a different location.
-       > Note: Do not include the region prefix in brackets, e.g. use "Central US" rather than "(US) Central US".
-   
-3. Read the Terms and Conditions and click 'Purchase' (this refers to the resources hosted on Azure, and is not a usage agreement for Teamwork Analytics.)
+> Note: Windows updates, by default, are automatically managed by Azure, see [here](https://docs.microsoft.com/en-us/azure/automation/automation-update-management#windows) for details. We do not change any Windows Update settings, so if you require something different you will need to configure this manually post deployment.
+
+Pricing to run these Azure components in your tenant vary and are subject to change. [View the current price estimate](https://azure.com/e/3c58dcaaa4ee498d92ed80cbec706ea9).
+
+Once the deployment is complete, if you have opted to include the Notification Service, you will need to provide the Bot Preshared Key to Modality to allow us to authenticate with your deployment. This can be found in the parametersFile.json.
 
 ## Upgrading
 
-When an upgrade is available, you will be sent a link to an ARM template. The process for upgrading is identical to installation (see above), except that you will choose an existing Resource Group, rather than creating a new one.
-
-Azure Resource Manager analyses the difference from past deployments, and only changes what it needs to.
+Each time the script is run and regardless of deployment mode that has been chosen, the Teamwork Analytics services are removed and then a new service is installed. If you are using a different version script than was used before then that version will be installed. When the service starts the database will attempt to be upgraded. If a parametersFile exists in the script folder then this will be read and used for the deployment. However, if there is no parametersFile then you will need to complete all information as prompted.
 
 ## Pausing or uninstalling
 
-Teamwork Analytics can be managed via its Resource Group in [Azure Portal](https://portal.azure.com/).
+1. If you selected **O** to download and install Teamwork Analytics on the Windows machine that the script is being run from then you can start and stop the **ModalityTeamworkAnalytics** windows service and where the Notification service has been deployed then you can disable the Scheduled Tasks that start with **Bot** to prevent messages being sent to the Automation Bot.
+
+* To uninstall the service from the machine that the script is being run, use the -uninstall yes switch.
+
+  ![Script Uninstall](images/scriptuninstall.png)
+
+1. If you selected **A** to install all required components into Azure using an ARM Template then Teamwork Analytics can be managed via its Resource Group in [Azure Portal](https://portal.azure.com/).
 
 * To pause the data gathering process, use Azure Portal to navigate to the virtual machine (usually named *twa-vm*) inside the Resource Group, and click "Stop". To resume the process, click "Start". Teamwork Analytics runs as a Windows service that starts automatically with the Virtual Machine.
 * To uninstall Teamwork Analytics completely, **including deleting Teams usage data**, simply delete the Resource Group. This will delete all the resources therein. You will be prompted to type in the name of the Resource Group for confirmation.

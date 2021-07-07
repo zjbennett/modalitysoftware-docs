@@ -1,32 +1,61 @@
-## Teamwork Analytics Data Collector Deployment
+# Modality Systems Teamwork Analytics
 
-The Teamwork Analytics Technical Documentation page provides access to all of the platform documentation you will need to successfully setup and configure Teamwork Analytics.
+Modality Systems’ Teamwork Analytics supports organisations with hundreds of thousands of Microsoft Teams users all over the world, driving adoption and managing the entire lifecycle of Teams to ensure best practice, governance, and security.
 
-## Deployment Prerequisites
+Teamwork Analytics combines automation and Power BI reporting.
 
-You will need:
+Teamwork Analytics can be run by Modality Systems in Azure as software as a service (SaaS) or on a customer azure tenant (CAT).
 
-- A Office 365 Global admin to register an Azure Application ID
-- Access to a Microsoft Azure tenant
-- An Azure Global Admin account (for admin consent of application permissions)
-- To create a PowerBI Pro service user account and provide us with login credentials
+This documentation gives full details of the deployment and configuration of Teamwork Analytics
 
-### Step 1: Register an Azure Application ID
+> Some reports in Teamwork Analytics can be affected by an admin centre setting, see [here](TWA-FAQ.md#is-teamwork-analytics-effected-by-the-hide-user-details-in-reports-setting) for details.
 
-Start by registering a new Azure Application in your Azure tenant. 
+# Teamwork Analytics - SaaS
 
-For this step you will need to use an Azure Global Admin account. 
+As a global dedicated Microsoft Systems Integrator, Independent Software Vendor (ISV) and Cloud Solutions Provider (CSP) with 11 Gold competencies and multiple Global Partner of the Year awards, we are happy to offer Teamwork Analytics as a service run from Microsoft Azure.
 
-[Registering Teamwork Analytics as an Azure Application](registerapplication.md)
+Customers will need to grant access from their Office 365 tenant and each person at the customer that wants to review Power BI reporting will need Power BI Professional (just for users looking at reporting, not all users).
 
-Once the application has been registered, submit the Application ID of your newly created application to Modality System for it to be whitelisted. Once this is has happened you will be given access to continue the deployment using the steps below.
+This is the quickest and easiest way to run Teamwork Analytics
 
-### Step 2: Deploy Teamwork Analytics Azure Resource Management (ARM)
+### [Setting up Teamwork Analytics SaaS](https://docs.modalitysystems.com/twa/SaaS/)
 
-Teamwork Analytics uses an Azure Resource Management (ARM) template to ease deployment. The ARM template ensures that all data is held on your Azure tenant, and is a simple way to deploy and secure several resources on your Azure tenant. Using the information provided to you from the previous step, follow the [deployment steps here](deploytwa.md).
+###  [CreateTeam Deployment SaaS](https://docs.modalitysystems.com/CreateTeam/deployteamsapp.html)
 
-When the deployment has completed, review the resources which have been created within the resource group. One of the resources is a SQL Server with a name similar to *twa-aaa1bb2c3dd4e*. Make a note of this name.
 
-### Step 3: Get PowerBI Apps from the App Store and Connect to your SQL Database
 
-For more details see the Apps and details here
+# Teamwork Analytics -  Customer Azure Tenant (CAT)
+
+For customers that have requirements to keep data and control within their own Microsoft tenant, Modality Systems fully supports Teamwork Analytics being deployed on customer azure tenant (CAT) via Azure Resource Manager (ARM) templates.
+
+This allows Teamwork Analytics to be deployed without Modality Systems having any access to customer data.
+
+Below are the steps to deploy CreateTeam and the Automation and Reporting
+
+### [Teamwork Analytics Data Backend Deployment CAT](https://docs.modalitysystems.com/twa/TeamworkAnalyticsDataCollectorDeployment.html)
+
+### [Teamwork Analytics Power BI Reports Deployment](https://docs.modalitysystems.com/twa/PowerBIAppsAdminInstallGuide.html)
+
+### [CreateTeam Deployment CAT](https://docs.modalitysystems.com/CreateTeam/)
+
+
+
+## **Teamwork Analytics Architecture and FAQ**
+
+###  [Teamwork Analytics Architecture](https://docs.modalitysystems.com/twa/TWA-Architecture-Overview.html)
+
+### [Teamwork Analytics Data Collection Explained](https://docs.modalitysystems.com/twa/TeamworkAnalyticsDataCollectionExplained.html)
+
+### [Teamwork Analytics Frequently Asked Questions](https://docs.modalitysystems.com/twa/TWA-FAQ.html)
+
+
+
+# Teamwork Analytics Power BI Report Guides
+
+PowerBI apps are available from [Microsoft AppSource](https://appsource.microsoft.com/en-us/marketplace/apps?search=Modality%20Systems&page=1)
+
+###  [Teams Usage Report Guide](https://docs.modalitysystems.com/twa/Reports/TeamsUsage/TeamsUsageGuidance.html)
+
+###  [Teams Governance Report Guide](https://docs.modalitysystems.com/twa/Reports/TeamsGovernanceandSecurity/OperationsGovernanceandCompliance.html)
+
+###  [Teams Performance Report Guide](https://docs.modalitysystems.com/twa/Reports/TeamsGovernanceandSecurity/OperationsGovernanceandCompliance.html)

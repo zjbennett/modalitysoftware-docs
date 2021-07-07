@@ -1,26 +1,45 @@
 # How to deploy CreateTeam App into Teams
 
-Create Team is provided as an Microsoft Teams App that needs to be uploaded to your organisation's Apps section within Microsoft Teams.
+Create Team is provided as an Microsoft Teams App which needs to be uploaded to your organisation's Apps section within Microsoft Teams.
 
-> NOTE: Some of the steps below require making changes to your Microsoft Online Tennant which can sometimes take a few hours to take effect
+> NOTE: Some of the steps below require making changes to your Microsoft Online Tenant which can sometimes take a few hours to take effect
 
 ## Admin Consent for CreateTeam App API
 
 For the App to be able to create teams in the target Teams Tenant, it is a requirement that a Office 365 Global Admin of that tenant grants admin consent. 
 
-1. This is achieved by clicking on the following link and logging in with a Global Administrator account
+1. This is achieved by clicking on the following link and logging in with a Global Administrator account, this will consent to the AAD APP 1 permissions below (for the API). Note AAD App 2 below (for the client) does not require admin consent.
 
-   [Provide Admin Consent](https://login.microsoftonline.com/common/adminconsent?client_id=d992e819-1a67-4840-89d3-1cee8cd4e735&redirect_uri=https://tgmodprod.azureedge.net/AdminConsent)
+   [Provide Admin Consent](https://mod.qa/CreateTeamConsent)
 
-2. From here a summary screen showing what is required will be displayed
+2. These are the permissions that will be required
 
-   ![Screenshot](images/admin-consent.png)
+   ### AAD App 1 (for the API)
+     
+      #### Microsoft Graph Permissions (Delegated - no consent required)
+      **openid** Sign in and read user profile - Allows users to sign-in to the app, and allows the app to read the profile of signed-in      users. It also allows the app to read basic company information of signed-in users. (required for multi-step approval feature, when approving/declining team creation requests)
+     
+      #### Microsoft Graph Permissions (Application)
+      **Directory.ReadWrite.All** Read and write directory data - Allows the app to read and write data in your organization's directory,      such as users, and groups, without a signed-in user. Does not allow user or group deletion.
 
-3. The Admin Consent will be visible within the Enterprise Applications section of Azure AD
+      **Groups.ReadWrite.All** Read and write all groups - Allows the app to create groups, read all group properties and memberships,        update group properties and memberships, and delete groups. Also allows the app to read and write group calendar and conversations.      All of these operations can be performed by the app without a signed-in user.
+
+      **Sites.Read.All** Read items in all site collections - Allows the app to read information related to sites within SharePoint in your organization.
+
+      #### SharePoint Permissions (Application)
+
+      **Sites.FullControl.All** Have full control of site collections - Allows the app to have full control over all of the within SharePoint in your organization.
+      
+      ### AAD App 2 (for the client) : Delegated Permisions (no consent required)
+      **openid** Sign in and read user profile - Allows users to sign-in to the app, and allows the app to read the profile of signed-in      users. It also allows the app to read basic company information of signed-in users.
+
+3. The Admin Consent for AAD App 1 (for the API) that you just consented to, will be visible within the Enterprise Applications section of Azure AD
 
    ![Screenshot](images/enterprise-applications.png)
 
 ## Installation
+
+**[Click here to download the CreateTeam manifest file](https://github.com/modalitysystems/CreateTeamGABuilds/releases/latest)**
 
 1. 1.	From Microsoft Teams go to the Apps section
    
@@ -38,9 +57,7 @@ For the App to be able to create teams in the target Teams Tenant, it is a requi
    
    ![Screenshot](images/app-deployed.png)
    
-> NOTE: To update an App that has already been installed, navigate to the App within your companies Apps section then hover your mouse pointer over the app, click on the ... in the top right corner and click Update
-   
-   ![Screenshot](images/app-update.png)
+Already have CreateTeam installed? [Follow this process to update the existing app with the new manifest.](update-createteam-manifest.md)
    
 ## Allow App to be installed within Microsoft Teams
 
@@ -68,25 +85,25 @@ To improve the end user experience it is recommended to pin the App to the main 
 
    ![Screenshot](images/admin-setup-pols.png)
     
-2. Either edit *Global (Org-wide default)* or create a new policy and give it a name
+1. Either edit *Global (Org-wide default)* or create a new policy and give it a name
 
    ![Screenshot](images/pinned-apps-notg.png)
 
-3. Click *Add apps*, select *Permissions policy* from previous step, search for TG and click Add
+1. Click *Add apps*, select *Permissions policy* from previous step, search for TG and click Add
 
    ![Screenshot](images/add-pinned-apps.png)
 
-4. Click Save
+1. Click Save
 
    ![Screenshot](images/pinned-apps-complete.png)
 
 If you created a new Setup policy in step 2 then you will need to assign users to the policy
 
-5. From the Microsoft Teams Admin Center, under *Teams apps* click *Setup policies*, click on the tick next to the required policy name
+1. From the Microsoft Teams Admin Center, under *Teams apps* click *Setup policies*, click on the tick next to the required policy name
 
    ![Screenshot](images/admin-setup-pols-users.png)
 
-6. Click *Manage users* and add the required users
+1. Click *Manage users* and add the required users
     
    ![Screenshot](images/manage-users.png)
    
@@ -101,26 +118,12 @@ Further information about managing app setup policies in Microsoft Teams is avai
 When a user first launches the App from within Microsoft Team, they are required to provide consent for their details to be accessed by the App
 
    ![Screenshot](images/teams-consent.png)
-   
-## Enabling Users to create teams with Guest Access
-
-If this feature is enabled for your tenant you can enable users in the following steps.
-
-1. Login to Azure Portal
-2. Click Azure Active Directory
-3. Click Enterprise Applications
-4. Search for Modality TG API
-5. Click Users and Groups
-6. Click Add user
-7. Find your users
-8. Select the Guest Admin role 
-9. Assign.
+  
 
 ## Changing default settings
 
 This application looks at your default tenant settings to determine the default value of certain fields.
-To change your default tenant settings read the following guide.
-https://docs.microsoft.com/en-us/graph/api/resources/groupsetting?view=graph-rest-1.0
+To change your default tenant settings read the following [guide](https://docs.microsoft.com/en-us/graph/api/resources/groupsetting?view=graph-rest-1.0).
 
 The following fields look at tenant default values
 1. External Checkbox looks at AllowToAddGuests value
